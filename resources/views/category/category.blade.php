@@ -3,7 +3,6 @@
         Entry Sheet
     </x-slot>
        <h1>ES_Storage</h1>
-       <a href='/posts/escreate'>+File</a>
         <div class='sheets'>
             @foreach ($sheets as $sheet)
                 <div class='sheet'>
@@ -17,4 +16,5 @@
         <div class='paginate'>
             {{ $sheets->links() }}
         </div>
+        <a href="/dashboard">back</a>
 </x-app-layout>

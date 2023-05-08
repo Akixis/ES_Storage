@@ -3,11 +3,13 @@
         Strage
     </x-slot>
        <h1>ES_Storage</h1>
-       <a href='/posts/escreate'>+File</a>
-        <div class='comps'>
-            @foreach ($comps as $comp)
+       
+        <div class='comp'>
+            @foreach ($companies as $comp)
                 <div class='comp'>
-                    <h2 class='title'>{{ $comp->title }}</h2>
+                    <h2 class='title'>
+                        <a href="/companies/{{ $comp->id }}">{{ $comp->title }}</a>
+                    </h2>
                 </div>
             @endforeach
         </div>

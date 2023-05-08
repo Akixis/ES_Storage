@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Industry;
 use App\Models\Type;
+use App\Models\Company;
 use App\Models\Sheet;
+use App\Http\Requests\PostRequest;
+use App\Models\Category;
 
 class PostController extends Controller
 {
+    //各階層画面
     public function index(Industry $inds)//インポートしたPostをインスタンス化して$postとして使用。
     {
         //return $inds->get();//$indsの中身を戻り値にする。
@@ -18,22 +22,42 @@ class PostController extends Controller
     {
         return view('index/type')->with(['types' => $type->get()]);
     }
-    public function comp(Company $comps)
+    public function company(Company $company)
     {
-        return view('index/company')->with(['comps' => $comps->get()]);
+        return view('index/company')->with(['comps' => $company->get()]);
     }
-    public function sheet(Sheet $sheets)
+    public function sheet(Sheet $sheet)
     {
-        return view('index/sheet')->with(['sheets' => $sheets->get()]);
+        return view('index/sheet')->with(['sheets' => $sheet->getPaginateByLimit()]);
     }
-    public function create()
+    //詳細画面
+    public function show(Sheet $sheet)
     {
-        return view('index/escreate');
+        return view('index/show')->with(['sheet' => $sheet]);
     }
-    public function estore(Request $request, Sheet $sheet)
+    
+    //投稿用
+    public function create(Category $category)
+    {
+        return view('index/escreate')->with(['categories' => $category->get()]);
+    }
+    public function estore(PostRequest $request, Sheet $sheet)
     {
         $input = $request['epost'];
         $sheet->fill($input)->save();
+        return redirect('/posts/' . $sheet->id);
+    }
+    //編集用
+    public function edit(Sheet $sheet)
+    {
+        return view('index/edit')->with(['sheet' => $sheet]);
+    }
+    
+    public function update(PostRequest $request, Sheet $sheet)
+    {
+        $input_post = $request['epost'];
+        $sheet->fill($input_post)->save();
+
         return redirect('/posts/' . $sheet->id);
     }
 }

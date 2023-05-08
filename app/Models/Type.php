@@ -23,4 +23,8 @@ class Type extends Model
     {
         return $this::with('industry')->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
+    public function getByCategory(int $limit_count = 5)
+    {
+        return $this->companies()->with('type')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
 }

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Industry;
+use App\Models\Type;
+use App\Models\Company;
+use App\Models\Sheet;
+use App\Models\Category;
 
 class EsController extends Controller
 {
@@ -16,5 +20,17 @@ class EsController extends Controller
     public function industry(Industry $industry)
     {
         return view('index.type')->with(['types' => $industry->getByCategory()]);
+    }
+    public function type(Type $type)
+    {
+        return view('index.company')->with(['companies' => $type->getByCategory()]);
+    }
+    public function company(Company $company)
+    {
+        return view('index.sheet')->with(['sheets' => $company->getByCategory()]);
+    }
+    public function cates(Category $category)
+    {
+        return view('category.category')->with(['sheets' => $category->getByCategory()]);
     }
 }

@@ -17,8 +17,19 @@ use App\Http\Controllers\EsController;
 Route::get('/', function () { return view('welcome'); });
 Route::get('/inds', [PostController::class, 'index'])->name('index');
 Route::get('/industries/{industry}', [EsController::class,'industry']);
+Route::get('/types/{type}', [EsController::class,'type']);
+Route::get('/companies/{company}', [EsController::class,'company']);
+//投稿用
 Route::get('/posts/escreate', [PostController::class, 'create']);
 Route::post('/esposts', [PostController::class, 'estore']);
+Route::get('/posts/{sheet}', [PostController::class, 'show']);
+
+//編集用
+Route::get('/posts/{sheet}/edit', [PostController::class, 'edit']);
+Route::put('/posts/{sheet}', [PostController::class, 'update']);
+
+//リレーション
+Route::get('/categories/{category}', [EsController::class,'cates']);
 //Route::get('/inds/{type}', [PostController::class ,'type']);
 //Route::get('/inds',[PostController::class,'index']);
 Route::get('/types',[PostController::class,'type']);
