@@ -12,6 +12,12 @@ use App\Models\Category;
 
 class PostController extends Controller
 {
+    //名前付け
+      public function maincate(Category $category)//インポートしたPostをインスタンス化して$postとして使用。
+    {
+        return view('category/maincate')->with(['categories' => $category->get()]);
+        //return $category->get();
+    }
     //各階層画面
     public function index(Industry $inds)//インポートしたPostをインスタンス化して$postとして使用。
     {
@@ -22,11 +28,11 @@ class PostController extends Controller
     {
         return view('index/type')->with(['types' => $type->get()]);
     }
-    public function company(Company $company)
+    public function company(Type $type,Company $company)
     {
-        return view('index/company')->with(['comps' => $company->get()]);
+        return view('index/company')->with(['comps' => $company->get(),'type'=>$type]);
     }
-    public function sheet(Sheet $sheet)
+    public function sheet(Sheet $sheet,Company $company)
     {
         return view('index/sheet')->with(['sheets' => $sheet->getPaginateByLimit()]);
     }
@@ -36,17 +42,34 @@ class PostController extends Controller
         return view('index/show')->with(['sheet' => $sheet]);
     }
     
-    //投稿用
-    public function create(Category $category)
+    //es投稿用
+    public function create(Category $category,Company $company)
     {
-        return view('index/escreate')->with(['categories' => $category->get()]);
+        return view('index/escreate')->with(['categories' => $category->get(),'company'=>$company]);
     }
-    public function estore(PostRequest $request, Sheet $sheet)
+    public function estore(PostRequest $request, Sheet $sheet)//保存
     {
         $input = $request['epost'];
-        $sheet->fill($input)->save();
+        $sheet->favo=$request['favo'];
+        $isChecked=$request->has('checkbox');
+        $sheet->favo=$isChecked ? 1:0;
+        $sheet->fill($input);
+        $sheet->save();
         return redirect('/posts/' . $sheet->id);
     }
+    
+    //企業追加用
+     public function ccreate(Type $type)
+    {
+        return view('index/cmcreate')->with(['type' => $type]);
+    }
+     public function cstore(PostRequest $request, Company $company)
+    {
+        $input = $request['cpost'];
+        $company->fill($input)->save();
+        return redirect('/posts/' . $company->id);
+    }
+    
     //編集用
     public function edit(Sheet $sheet)
     {
@@ -59,5 +82,11 @@ class PostController extends Controller
         $sheet->fill($input_post)->save();
 
         return redirect('/posts/' . $sheet->id);
+    }
+    //削除
+    public function delete(Sheet $sheet)
+    {
+        $sheet->delete();
+        return redirect('/dashboard');
     }
 }

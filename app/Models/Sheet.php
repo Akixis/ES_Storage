@@ -4,14 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
+//{{ old($company->id) }}
 class Sheet extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $fillable = [
         'title',
         'text',
-        'category_id'
+        'category_id',
+        'company_id'
     ];
     public function company()
     {

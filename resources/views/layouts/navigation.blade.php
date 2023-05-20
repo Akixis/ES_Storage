@@ -18,6 +18,12 @@
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
                         {{ __('Strage') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('maincate')" :active="request()->routeIs('maincate')">
+                        {{ __('Category') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('maincate')" :active="request()->routeIs('maincate')">
+                        {{ __('Favorite') }}
+                    </x-nav-link>
                 </div>
             </div>
 

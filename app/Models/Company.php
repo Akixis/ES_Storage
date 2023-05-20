@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+//<a href='/posts/ccreate/{{$type->id}}'>+Folder</a>
 class Company extends Model
 {
     use HasFactory;
@@ -25,6 +25,7 @@ class Company extends Model
         return $this->sheets()->with('company')->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     protected $fillable = [
+        'title',
         'type_id'
     ];
 }

@@ -15,6 +15,13 @@
                 <h2>本文</h2>
                 <input type='text' name='epost[text]' value="{{ $sheet->text }}">
             </div>
+            <div class='check'>
+            <h3>お気に入り</h3>
+            <input type="checkbox" name="epost[favo]" value="1">
+            @if($sheet->favo===1)
+             <td><input type="checkbox" checked="checked"></td>
+            @endif
+            </div>
             <input type="submit" value="保存">
         </form>
     </div>

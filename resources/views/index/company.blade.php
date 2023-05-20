@@ -3,7 +3,7 @@
         Strage
     </x-slot>
        <h1>ES_Storage</h1>
-       
+       <a href='/posts/ccreate/{{$type->id}}'>+Folder</a>
         <div class='comp'>
             @foreach ($companies as $comp)
                 <div class='comp'>

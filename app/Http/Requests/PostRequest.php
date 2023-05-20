@@ -26,6 +26,7 @@ class PostRequest extends FormRequest
         return [
             'epost.title' => 'required|string|max:50',
             'epost.text' => 'required|string|max:600',
+            //'cpost.title' => 'required|string|max:50',
         ];
     }
 }

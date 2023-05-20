@@ -23,11 +23,11 @@ class EsController extends Controller
     }
     public function type(Type $type)
     {
-        return view('index.company')->with(['companies' => $type->getByCategory()]);
+        return view('index.company')->with(['companies' => $type->getByCategory(),'type'=>$type]);
     }
-    public function company(Company $company)
+    public function company(Type $type,Company $company)
     {
-        return view('index.sheet')->with(['sheets' => $company->getByCategory()]);
+        return view('index.sheet')->with(['sheets' => $company->getByCategory(),'company'=>$company,'type'=>$type]);
     }
     public function cates(Category $category)
     {
