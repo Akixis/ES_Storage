@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Industry;
 use App\Models\Type;
@@ -15,31 +15,37 @@ class PostController extends Controller
     //名前付け
       public function maincate(Category $category)//インポートしたPostをインスタンス化して$postとして使用。
     {
-        return view('category/maincate')->with(['categories' => $category->get()]);
-        //return $category->get();
-    }
-    //各階層画面
-    public function index(Industry $inds)//インポートしたPostをインスタンス化して$postとして使用。
-    {
         //return $inds->get();//$indsの中身を戻り値にする。
+        return view('category/maincate')->with(['categories' => $category->get()]);
+        
+    }
+    //メインルート
+      public function index(Industry $inds)//インポートしたPostをインスタンス化して$postとして使用。
+    {
+        
         return view('index/index')->with(['inds' => $inds->get()]);
     }
-    public function type(Type $type)
+    public function industry(Industry $industry)
     {
-        return view('index/type')->with(['types' => $type->get()]);
+        return view('index/type')->with(['types' => $industry->getByCategory()]);
     }
-    public function company(Type $type,Company $company)
+    public function type(Type $type,Company $company)
     {
-        return view('index/company')->with(['comps' => $company->get(),'type'=>$type]);
+        return view('index/company')->with(['types' => $type,'companies' => $company->getPaginateByLimit()]);
     }
-    public function sheet(Sheet $sheet,Company $company)
+    public function company(Company $company,Sheet $sheet)
     {
-        return view('index/sheet')->with(['sheets' => $sheet->getPaginateByLimit()]);
+        return view('index/sheet')->with(['company'=>$company,'sheets' => $sheet->getPaginateByLimit()]);
     }
+    public function cates(Category $category)
+    {
+        return view('category.category')->with(['sheets' => $category->getByCategory()]);
+    }
+    
     //詳細画面
-    public function show(Sheet $sheet)
+    public function show(Company $company,Sheet $sheet)
     {
-        return view('index/show')->with(['sheet' => $sheet]);
+        return view('index/show')->with(['company'=>$company,'sheet' => $sheet]);
     }
     
     //es投稿用
@@ -50,11 +56,7 @@ class PostController extends Controller
     public function estore(PostRequest $request, Sheet $sheet)//保存
     {
         $input = $request['epost'];
-        $sheet->favo=$request['favo'];
-        $isChecked=$request->has('checkbox');
-        $sheet->favo=$isChecked ? 1:0;
-        $sheet->fill($input);
-        $sheet->save();
+        $sheet->fill($input)->save();
         return redirect('/posts/' . $sheet->id);
     }
     
@@ -63,13 +65,18 @@ class PostController extends Controller
     {
         return view('index/cmcreate')->with(['type' => $type]);
     }
-     public function cstore(PostRequest $request, Company $company)
+     public function cstore(Request $request, Company $company)
     {
         $input = $request['cpost'];
         $company->fill($input)->save();
-        return redirect('/posts/' . $company->id);
+        return redirect('/types/'. $company->type_id);
+        
     }
-    
+    public function cdelete(Company $company)
+    {
+        $company->delete();
+        return redirect('/types/'.$company->type_id);
+    }
     //編集用
     public function edit(Sheet $sheet)
     {
@@ -87,6 +94,6 @@ class PostController extends Controller
     public function delete(Sheet $sheet)
     {
         $sheet->delete();
-        return redirect('/dashboard');
+        return redirect('/companies/'.$sheet->company_id);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-//{{ old($company->id) }}
+
 class Sheet extends Model
 {
     use HasFactory;
@@ -14,7 +14,8 @@ class Sheet extends Model
         'title',
         'text',
         'category_id',
-        'company_id'
+        'company_id',
+        'favo'
     ];
     public function company()
     {

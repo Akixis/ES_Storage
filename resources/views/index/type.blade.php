@@ -12,4 +12,7 @@
                 </div>
             @endforeach
         </div>
+        <div class="footer">
+            <a href="/inds">back</a>
+        </div>
 </x-app-layout>

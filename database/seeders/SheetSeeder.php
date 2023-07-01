@@ -18,9 +18,9 @@ class SheetSeeder extends Seeder
     {
         DB::table('sheets')->insert([
             'id'=>1,
-          'company_id'=>1,
+          'company_id'=>3,
           'category_id'=>1,
-          'favo'=>0,
+          'favo'=>false,
           'title' => '例',
           'text' => 'てすてす',
           'created_at' => new DateTime(),

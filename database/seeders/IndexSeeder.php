@@ -17,12 +17,14 @@ class IndexSeeder extends Seeder
     public function run()
     {
       DB::table('industries')->insert([
+          'id'=>1,
           'user_id'=>1,
           'title' => 'IT業界',
           'created_at' => new DateTime(),
           'updated_at' => new DateTime(),
         ]);
       DB::table('industries')->insert([
+          'id'=>1,
           'user_id'=>1,
           'title' => 'メーカー業界',
           'created_at' => new DateTime(),

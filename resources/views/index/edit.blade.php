@@ -4,7 +4,7 @@
     </x-slot>
        <h1 class="title">edit</h1>
     <div class="content">
-        <form action="/posts/{{ $sheet->id }}" method="POST">
+        <form action="/esposts/{{ $sheet->id }}" method="POST">
             @csrf
             @method('PUT')
             <div class='content__title'>
@@ -17,9 +17,10 @@
             </div>
             <div class='check'>
             <h3>お気に入り</h3>
-            <input type="checkbox" name="epost[favo]" value="1">
-            @if($sheet->favo===1)
-             <td><input type="checkbox" checked="checked"></td>
+            @if($sheet->favo===false)
+            <input type="checkbox" name="epost[favo]" value=true {{ old('epost[favo]') == true ? 'checked' : false }}>
+            @else
+            <input type="checkbox" name="epost[favo]" value=false {{ old('epost[favo]') == true ? 'checked' : false }}>
             @endif
             </div>
             <input type="submit" value="保存">

@@ -15,32 +15,30 @@ use App\Http\Controllers\EsController;
 |
 */
 //名前付きルート
-Route::get('/d', [PostController::class, 'maincate'])->name('maincate');
+
 Route::get('/', function () { return view('welcome'); });
 Route::get('/inds', [PostController::class, 'index'])->name('index');
-Route::get('/industries/{industry}', [EsController::class,'industry']);
-Route::get('/types/{type}', [EsController::class,'type']);
-Route::get('/companies/{company}', [EsController::class,'company']);
+Route::get('/industries/{industry}', [PostController::class,'industry']);//業種１
+Route::get('/types/{type}', [PostController::class,'type']);//業種２
+Route::get('/companies/{company}', [PostController::class,'company']);
+Route::get('/d', [PostController::class, 'maincate'])->name('maincate');
+
 //投稿用
 Route::get('/posts/escreate/{company}', [PostController::class, 'create']);
-Route::post('/esposts', [PostController::class, 'estore']);//追記
+Route::post('/esposts', [PostController::class, 'estore']);
 Route::get('/posts/{sheet}', [PostController::class, 'show']);
-Route::get('/posts/ccreate/{type}', [PostController::class, 'ccreate']);
+Route::get('/posts/ccreate/{type}', [PostController::class, 'ccreate']);//会社用
+Route::post('/csposts', [PostController::class, 'cstore']);
+Route::delete('/cposts/{company}', [PostController::class,'cdelete']);
 //編集用
 Route::get('/posts/{sheet}/edit', [PostController::class, 'edit']);
 Route::put('/posts/{sheet}', [PostController::class, 'update']);
 Route::delete('/posts/{sheet}', [PostController::class,'delete']);
 
-//リレーション
-Route::get('/categories/{category}', [EsController::class,'cates']);
-//Route::get('/inds/{type}', [PostController::class ,'type']);
-//Route::get('/inds',[PostController::class,'index']);
-Route::get('/types',[PostController::class,'type']);
-Route::get('/comps',[PostController::class,'company']);
-Route::get('/sheets',[PostController::class,'sheet']);
-//Route::get('/EsController', [EsController::class, 'menu']); 
-//Route::get('/', [EsController::class, 'menu'])->name('menu');//'/'が一番最初に送られてくるやつ
+//カテゴリ
+Route::get('/categories/{category}', [PostController::class,'cates']);
 
+//標準機能
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

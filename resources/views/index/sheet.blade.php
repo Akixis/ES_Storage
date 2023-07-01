@@ -19,6 +19,9 @@
                 </form>
             @endforeach
         </div>
+         <div class="footer">
+            <a href="/types/{{$company->id}}">back</a>
+        </div>
         <div class='paginate'>
             {{ $sheets->links() }}
         </div>

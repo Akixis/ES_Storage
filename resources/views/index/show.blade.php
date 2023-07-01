@@ -16,7 +16,7 @@
             <a href="/posts/{{ $sheet->id }}/edit">edit</a>
         </div>
         <div class="footer">
-            <a href="/dashboard">戻る</a>
+            <a href="/companies/{{$sheet->company_id}}">back</a>
         </div>
 </x-app-layout>
 

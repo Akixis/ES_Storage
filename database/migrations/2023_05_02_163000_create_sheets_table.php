@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained('companies');
             $table->foreignId('category_id')->constrained('categories');
-            $table->Integer('favo');
+            $table->Boolean('favo');
             $table->string('title',20);
             $table->string('text',300);
             $table->timestamps();

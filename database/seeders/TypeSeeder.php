@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use App\Models\Type;
 
 class TypeSeeder extends Seeder
 {
@@ -16,13 +17,15 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-       DB::table('types')->insert([
+       Type::create([
+          'id'=>1,
           'industry_id'=>1,
           'title' => 'SIer',
           'created_at' => new DateTime(),
           'updated_at' => new DateTime(),
         ]);
-      DB::table('types')->insert([
+      Type::create([
+          'id'=>2,
           'industry_id'=>1,
           'title' => 'Webアプリ',
           'created_at' => new DateTime(),

@@ -16,5 +16,5 @@
         <div class='paginate'>
             {{ $sheets->links() }}
         </div>
-        <a href="/dashboard">back</a>
+        <a href="/companies/{{$sheet->company_id}}">back</a>
 </x-app-layout>

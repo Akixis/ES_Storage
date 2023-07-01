@@ -17,6 +17,7 @@ class CompanySeeder extends Seeder
     public function run()
     {
         DB::table('companies')->insert([
+          'id'=>1,
           'type_id'=>1,
           'title' => 'A',
           'created_at' => new DateTime(),
