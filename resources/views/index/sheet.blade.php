@@ -20,7 +20,7 @@
             @endforeach
         </div>
          <div class="footer">
-            <a href="/types/{{$company->id}}">back</a>
+            <a href="/types/{{$company->type_id}}">back</a>
         </div>
         <div class='paginate'>
             {{ $sheets->links() }}

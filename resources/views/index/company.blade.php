@@ -19,7 +19,7 @@
             @endforeach
         </div>
         <div class="footer">
-            <a href="/industries/{{$types->id}}">back</a>
+            <a href="/industries/{{$types->industry_id}}">back</a>
         </div>
         <script>
         function cdeletePost(id) {

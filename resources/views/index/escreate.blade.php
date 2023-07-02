@@ -6,7 +6,7 @@
         <form action="/esposts" method="POST">
             @csrf
             <input type="hidden" name="epost[company_id]" value="{{$company->id}}"/>
-            <input type="hidden" name="favo" value=0 />
+            <input type="hidden" name="epost[favo]" value="0"/>
             <div class="category">
             <h2>Category</h2>
                 <select name="epost[category_id]">
