@@ -2,9 +2,9 @@
     <x-slot name="header">
         Strage
     </x-slot>
-        <p class="Success">ES_Storage</p>
+        <p>ES_Storage</p>
         
-        <div class='primary'>
+        <div>
             @foreach ($inds as $ind)
                 <div class='ind'>
                     <h2 class='title'>
